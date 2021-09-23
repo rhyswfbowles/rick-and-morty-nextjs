@@ -1,18 +1,14 @@
 import React from 'react';
+import { TitleH1 } from './index.styles';
 
-interface IAvatarProps {
-  imageUrl: string;
-  isRounded?: boolean;
+interface ITitleProps {
+  text: string;
 }
 
-const Title: React.FunctionComponent<IAvatarProps> = ({
-  text,
+const Title: React.FunctionComponent<ITitleProps> = ({
+  text
 }) => {
-  return (
-    <>
-      
-    </>
-  );
+  return <TitleH1>{text}</TitleH1>;
 };
 
 export default Title;

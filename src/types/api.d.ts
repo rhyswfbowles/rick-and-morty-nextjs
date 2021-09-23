@@ -4,10 +4,6 @@
 
 /* eslint-disable */
 declare namespace LickApi {
-  interface IIntro {
-    text: string;
-  }
-
   interface ICharacterCore {
     id: number;
     name: string;

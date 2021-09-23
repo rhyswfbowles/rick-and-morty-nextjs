@@ -9,7 +9,7 @@ const ListPage: NextPage = ({ characters }) => {
   );
 };
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const res = await fetch('https://rickandmortyapi.com/api/character');
   const {results: characters} = await res.json();
 

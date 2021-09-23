@@ -1,16 +1,37 @@
 import styled from 'styled-components';
 
-interface ICharacterListItem {
-  maxItemsPerRow: number;
-}
-
 export const CharacterListWrapper = styled.ul`
   display: flex;
   flex-wrap: wrap;
   list-style: none;
+  padding: 15px;
 `;
 
-export const CharacterListItem = styled.li<ICharacterListItem>`
-  width: calc(calc(100% / ${p => p.maxItemsPerRow}) - 20px);
-  margin: 10px;
+export const CharacterListItem = styled.li`
+  width: calc(calc(100% / 6) - 20px);
+  margin: 40px 10px;
+  display: flex;
+  flex-direction: column;
+  @media (max-width: 750px) {
+    width: calc(calc(100% / 2) - 20px);
+    margin: 20px 10px;
+  }
+`;
+
+export const CharacterProfileLink = styled.a`
+  padding: 10px 15px;
+  background: #B7B7B7;
+  width: 100%;
+  text-align: center;
+`;
+
+export const CharacterMetaInfoWrapper = styled.div`
+  min-height: 90px;
+  padding: 10px 0;
+  flex-grow: 1;
+`;
+
+export const CharacterMetaSpan = styled.span`
+  display: block;
+  margin-bottom: 5px;
 `;
