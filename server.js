@@ -1,8 +1,7 @@
-import fs from "fs";
-import https from "https";
-import next from "next";
-import { parse } from "url";
-
+const https = require("https");
+const { parse } = require("url");
+const next = require("next");
+const fs = require("fs");
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 
