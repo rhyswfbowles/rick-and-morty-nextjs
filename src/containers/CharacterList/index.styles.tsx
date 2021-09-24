@@ -8,13 +8,13 @@ export const CharacterListWrapper = styled.ul`
 `;
 
 export const CharacterListItem = styled.li`
-  width: calc(calc(100% / 6) - 20px);
-  margin: 40px 10px;
+  width: calc(calc(100% / 2) - 20px);
+  margin: 20px 10px;
   display: flex;
   flex-direction: column;
-  @media (max-width: 750px) {
-    width: calc(calc(100% / 2) - 20px);
-    margin: 20px 10px;
+  @media (min-width: 750px) {
+    width: calc(calc(100% / 6) - 20px);
+    margin: 40px 10px;
   }
 `;
 
@@ -34,4 +34,16 @@ export const CharacterMetaInfoWrapper = styled.div`
 export const CharacterMetaSpan = styled.span`
   display: block;
   margin-bottom: 5px;
+`;
+
+export const LoadMoreButton = styled.button`
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: 0;
+  background #B7B7B7;
+  color: #000000;
+  padding: 25px;
+  margin-bottom: 20px;
+  cursor: pointer;
 `;

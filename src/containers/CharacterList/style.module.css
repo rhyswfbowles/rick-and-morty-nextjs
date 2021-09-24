@@ -1,9 +1,11 @@
 .character-lister--header {
+  padding: 125px 0;
   margin-bottom: -120px;
 }
 
 @media (max-width: 750px) {
   .character-lister--header {
     margin-bottom: 0;
+    padding: 50px 0;
   }
 }

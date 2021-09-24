@@ -1,12 +1,17 @@
+import https from 'https';
 import Link from "next/link";
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '../../components/Avatar';
 import Header from '../../components/Header';
 import Title from '../../components/Title';
 import Meta from '../../components/_shared/Meta';
 import SiteWrapper from '../../components/_shared/SiteWrapper';
-import { CharacterListItem, CharacterListWrapper, CharacterMetaInfoWrapper, CharacterMetaSpan, CharacterProfileLink } from './index.styles';
+import { CharacterListItem, CharacterListWrapper, CharacterMetaInfoWrapper, CharacterMetaSpan, CharacterProfileLink, LoadMoreButton } from './index.styles';
 import styles from './style.module.css';
+
+const fetchOptions = {
+  agent: new https.Agent({ rejectUnauthorized: false })
+} as RequestInit;
 
 interface ICharacterListProps {
   title: string;
@@ -17,15 +22,48 @@ const CharacterListContainer: React.FC<ICharacterListProps> = ({
   title,
   charactersList
 }) => {
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [characters, setCharacters] = useState(charactersList);
+  const [nextPageNo, setNextPageNo] = useState(2);
+  const [showLoadMore, setShowLoadMore] = useState(true);
+
+  
+  const loadMoreCharacters = async () => {
+    setIsLoading(true);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/characters?name=rick&status=alive&page=${nextPageNo}`, fetchOptions);
+    const { results, info } = await res.json();
+
+    if(!info.next) {
+      setShowLoadMore(false)
+    }
+    setCharacters((prevState) => [
+      ...prevState,
+      ...results
+    ]);
+    setIsLoading(false);
+    setNextPageNo(nextPageNo + 1);
+  }
+
+  const LoadMoreComponent = ({}) => {
+    return (
+      <LoadMoreButton onClick={loadMoreCharacters} className="btn-grad">
+        {isLoading ? 'Loading...' : 'Load More'}
+      </LoadMoreButton>
+    )
+  }
+
   return (
     <>
       <Meta title={title} />
       <Header className={styles['character-lister--header']}>
-        <Title text="Rick and Morty" />
+        <SiteWrapper>
+          <Title text="Rick and Morty" />
+        </SiteWrapper>
       </Header>
       <SiteWrapper>
         <CharacterListWrapper>
-          {charactersList.map((char) => (
+          {characters.map((char) => (
             <CharacterListItem
               key={char.id}
             >
@@ -41,6 +79,7 @@ const CharacterListContainer: React.FC<ICharacterListProps> = ({
             </CharacterListItem>
           ))}
         </CharacterListWrapper>
+        { showLoadMore ? <LoadMoreComponent />: null}
       </SiteWrapper>
     </>
   );

@@ -4,15 +4,17 @@ import { AvatarImg } from './index.styles';
 interface IAvatarProps {
   imageUrl: string;
   isRounded?: boolean;
+  className?: string;
 }
 
 const Avatar: React.FunctionComponent<IAvatarProps> = ({
   imageUrl,
-  isRounded = false
+  isRounded = false,
+  className
 }) => {
   return (
     <>
-      <AvatarImg src={imageUrl} rounded={isRounded} />
+      <AvatarImg className={className} src={imageUrl} rounded={isRounded} />
     </>
   );
 };
