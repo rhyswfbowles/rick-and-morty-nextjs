@@ -2,17 +2,21 @@ import https from 'https';
 import { NextPage } from 'next';
 import CharacterContainer from '../../../src/containers/Character';
 
+interface ICharacterPage {
+  character: LickApi.ICharacter;
+}
+
 const fetchOptions = {
   agent: new https.Agent({ rejectUnauthorized: false })
 } as RequestInit;
 
 const getUrlIdPart = url => url.substring(url.lastIndexOf('/') + 1);
 
-const CharacterPage: NextPage = ({character}) => {
+const CharacterPage: NextPage<ICharacterPage> = ({character}) => {
   return <CharacterContainer title="Rick and Morty" character={character}></CharacterContainer>
 };
 
-export async function getServerSideProps({req, params}) {
+export const getServerSideProps = async ({req, params}) => {
   let locationMeta : LickApi.IRawApiLocation;
   let firstEpisode: LickApi.IEpisode;
   let lastEpisode: LickApi.IEpisode;

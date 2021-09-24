@@ -6,18 +6,19 @@ const fetchOptions = {
     agent: new https.Agent({ rejectUnauthorized: false })
 } as RequestInit;
 
+interface IListPage {
+  characters: LickApi.ICharacter[];
+}
 
-const ListPage: NextPage = ({ characters }) => {
-  return (
-    <>
-      <CharacterListContainer title="Character Listing" charactersList={characters}/>
-    </>
-  );
+const ListPage: NextPage<IListPage> = ({characters}) => {
+  return <CharacterListContainer title="Character Listing" charactersList={characters}/>;
 };
 
-export async function getServerSideProps({req}) {
+export const getServerSideProps = async ({req}) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/characters?name=rick&status=alive`, fetchOptions);
-  const { results: characters } = await res.json();
+  const { results } = await res.json();
+
+  const characters: LickApi.ICharacter[] = results;
 
   return {
     props: {

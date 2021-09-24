@@ -27,7 +27,7 @@ declare namespace LickApi {
     id: number;
     name: string;
     air_date: string;
-    characters: number;
+    characters: ICharacter[];
     episode: string;
   }
 
