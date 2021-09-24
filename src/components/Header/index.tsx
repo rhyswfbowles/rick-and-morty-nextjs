@@ -2,8 +2,8 @@ import React from 'react';
 import { HeaderDiv } from './index.styles';
 
 interface IHeader {
-  className?: any;
-  children?: any;
+  className?: string;
+  children?: React.FC | HTMLElement;
 }
 
 const Header: React.FunctionComponent<IHeader> = ({

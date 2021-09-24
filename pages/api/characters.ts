@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import Redis from '../../lib/redis';
 
 const getCharacters = async (queryParams) => {
-  var queryString = Object.keys(queryParams).map(key => key + '=' + queryParams[key]).join('&');
+  const queryString = Object.keys(queryParams).map(key => key + '=' + queryParams[key]).join('&');
   const res = await fetch(`https://rickandmortyapi.com/api/character?${queryString}`);
   const data = await res.json();
   await Redis.set(`charactersList:${encodeURIComponent(queryString)}`, JSON.stringify(data));
