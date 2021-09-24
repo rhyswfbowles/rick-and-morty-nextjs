@@ -1,6 +1,6 @@
-import CharacterContainer from 'containers/Character';
 import https from 'https';
 import { NextPage } from 'next';
+import CharacterContainer from '../../src/containers/Character';
 
 interface ICharacterPage {
   character: LickApi.ICharacter;
