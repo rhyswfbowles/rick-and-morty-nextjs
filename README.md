@@ -2,6 +2,14 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+`The site must run on https to allow the fetch library to work`
+
+### Docker version
+```bash
+  docker-compose up --build
+```
+
+### NPM version
 Before we can get this started, we will need to do a few things:
 
 ```bash
@@ -12,7 +20,7 @@ Initialise Redis:
 ```bash
   docker-compose up -d redis
 ```
-### Development version
+
 Additionally it will need some environment variables set
 `.env.local`
 ```bash
@@ -26,26 +34,4 @@ then, run the development server:
 
 ```bash
   npm run dev
-```
-
-### Production version (npm)
-Additionally it will need some environment variables set
-`.env.local`
-```bash
-  NODE_ENV=production
-  REDIS_URL=localhost:6379
-  HOSTNAME=localhost
-  PORT=3000
-  NEXT_PUBLIC_HOST=https://$HOSTNAME:$PORT
-```
-
-then, run the server:
-
-```bash
-  npm run start
-```
-
-### Production version (Docker)
-```bash
-  docker-compose up --build
 ```

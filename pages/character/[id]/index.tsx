@@ -33,6 +33,11 @@ export const getServerSideProps = async ({params}) => {
   const firstEpisodeId = getUrlIdPart(characterMeta?.episode[0]);
   const lastEpisodeId = getUrlIdPart(characterMeta?.episode[characterMeta?.episode.length - 1]);
 
+  /*
+    Alternative approach to be taken here:
+    aggregation layer which builds up all the content for a character without hitting our own api
+  */
+
   if(locationId) {
     const locationRes = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/location/${locationId}`, fetchOptions);
     locationMeta = await locationRes.json();
