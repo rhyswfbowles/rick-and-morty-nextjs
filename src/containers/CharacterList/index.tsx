@@ -9,6 +9,11 @@ import SiteWrapper from '../../components/_shared/SiteWrapper';
 import { CharacterListItem, CharacterListWrapper, CharacterMetaInfoWrapper, CharacterMetaSpan, CharacterProfileLink, LoadMoreButton } from './index.styles';
 import styles from './style.module.css';
 
+/*
+  In the spirit of keeping the project as bare bones as possible 
+  i'm bypassing the ssl verification, as fetch requires https and absolute urls
+  However in the real world, I would never do this
+*/
 const fetchOptions = {
   agent: new https.Agent({ rejectUnauthorized: false })
 } as RequestInit;
@@ -42,12 +47,12 @@ const CharacterListContainer: React.FC<ICharacterListProps> = ({
       ...results
     ]);
     setIsLoading(false);
-    setNextPageNo(nextPageNo + 1);
+    setNextPageNo(prevPage => prevPage + 1);
   }
 
   const LoadMoreComponent = ({}) => {
     return (
-      <LoadMoreButton onClick={loadMoreCharacters} className="btn-grad">
+      <LoadMoreButton onClick={loadMoreCharacters}>
         {isLoading ? 'Loading...' : 'Load More'}
       </LoadMoreButton>
     )
@@ -79,7 +84,7 @@ const CharacterListContainer: React.FC<ICharacterListProps> = ({
             </CharacterListItem>
           ))}
         </CharacterListWrapper>
-        { showLoadMore ? <LoadMoreComponent />: null}
+        { showLoadMore && <LoadMoreComponent />}
       </SiteWrapper>
     </>
   );

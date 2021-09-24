@@ -12,11 +12,7 @@ const Avatar: React.FunctionComponent<IAvatarProps> = ({
   isRounded = false,
   className
 }) => {
-  return (
-    <>
-      <AvatarImg className={className} src={imageUrl} rounded={isRounded} />
-    </>
-  );
+  return <AvatarImg className={className} src={imageUrl} rounded={isRounded} />;
 };
 
 export default Avatar;
